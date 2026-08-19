@@ -4,8 +4,12 @@ import {
   MessageCircle,
   ShoppingBag,
   Sparkles,
+  LockKeyhole,
+  X,
 } from "lucide-react";
+
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const WHATSAPP = "https://wa.me/5493364007281";
 
@@ -61,27 +65,16 @@ const products = [
   },
 ];
 
-const categories = [
-  {
-    title: "Alfajores",
-    subtitle: "Pequeños momentos dulces",
-  },
-  {
-    title: "Tartas",
-    subtitle: "Para compartir",
-  },
-  {
-    title: "Pasta frola",
-    subtitle: "Un clásico argentino",
-  },
-  {
-    title: "Packs personalizados",
-    subtitle: "Armá tu combinación",
-  },
-];
-
 function App() {
+  const navigate = useNavigate();
+
   const [showAllProducts, setShowAllProducts] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [loginError, setLoginError] = useState("");
 
   const visibleProducts = showAllProducts
     ? products
@@ -89,18 +82,53 @@ function App() {
 
   const hiddenProducts = products.slice(4);
 
+  const handleLogin = (event) => {
+    event.preventDefault();
+
+    setLoginError("");
+
+    if (
+      username === "barby367" &&
+      password === "syg123"
+    ) {
+      sessionStorage.setItem(
+        "syg_creator_authenticated",
+        "true"
+      );
+
+      setShowLogin(false);
+      setUsername("");
+      setPassword("");
+
+      navigate("/creador");
+      return;
+    }
+
+    setLoginError("El usuario o la contraseña no son correctos.");
+  };
+
+  const closeLogin = () => {
+    setShowLogin(false);
+    setUsername("");
+    setPassword("");
+    setLoginError("");
+  };
+
   return (
     <div className="site">
 
       {/* ================= HEADER ================= */}
 
       <header className="header">
+
         <a
           className="brand"
           href="#inicio"
           aria-label="SyG Pastelería"
         >
-          <span className="brand-script">SyG</span>
+          <span className="brand-script">
+            SyG
+          </span>
 
           <span className="brand-subtitle">
             PASTELERÍA CASERA
@@ -108,28 +136,63 @@ function App() {
         </a>
 
         <nav className="desktop-nav">
-          <a href="#inicio">Inicio</a>
-          <a href="#productos">Productos</a>
-          <a href="#nosotros">Nosotros</a>
-          <a href="#contacto">Pedidos</a>
+          <a href="#inicio">
+            Inicio
+          </a>
+
+          <a href="#productos">
+            Productos
+          </a>
+
+          <a href="#nosotros">
+            Nosotros
+          </a>
+
+          <a href="#contacto">
+            Pedidos
+          </a>
         </nav>
 
-        <a
-          className="header-order"
-          href={WHATSAPP}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <MessageCircle size={18} />
-          Pedir
-        </a>
+        <div className="header-actions">
+
+          {/* LOGIN */}
+
+          <button
+            type="button"
+            className="header-login"
+            onClick={() => {
+              setShowLogin(true);
+              setLoginError("");
+            }}
+          >
+            <LockKeyhole size={16} />
+            Iniciar sesión
+          </button>
+
+          {/* WHATSAPP */}
+
+          <a
+            className="header-order"
+            href={WHATSAPP}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <MessageCircle size={18} />
+            Pedir
+          </a>
+
+        </div>
+
       </header>
 
       <main>
 
         {/* ================= HERO ================= */}
 
-        <section className="hero" id="inicio">
+        <section
+          className="hero"
+          id="inicio"
+        >
 
           <div className="hero-decoration hero-decoration-left" />
           <div className="hero-decoration hero-decoration-right" />
@@ -143,12 +206,14 @@ function App() {
 
             <h1>
               Dulces que
-              <span>saben a hogar.</span>
+              <span>
+                saben a hogar.
+              </span>
             </h1>
 
             <p className="hero-text">
-              Pastelería casera hecha con amor, para acompañar
-              tus momentos más lindos.
+              Pastelería casera hecha con amor,
+              para acompañar tus momentos más lindos.
             </p>
 
             <div className="hero-actions">
@@ -173,6 +238,7 @@ function App() {
             </div>
 
             <div className="hero-note">
+
               <span className="line" />
 
               <span>
@@ -180,6 +246,7 @@ function App() {
               </span>
 
               <span className="line" />
+
             </div>
 
           </div>
@@ -194,10 +261,12 @@ function App() {
             <div className="hero-photo-wrapper">
 
               <div className="hero-photo">
+
                 <img
                   src="/images/pack-dulce.jpg"
                   alt="Pack dulce de SyG Pastelería"
                 />
+
               </div>
 
               <div className="hero-photo-decoration" />
@@ -206,9 +275,12 @@ function App() {
 
             <div className="floating-card">
 
-              <span>♡</span>
+              <span>
+                ♡
+              </span>
 
               <div>
+
                 <strong>
                   Pedidos personalizados
                 </strong>
@@ -216,6 +288,7 @@ function App() {
                 <small>
                   Consultanos por WhatsApp
                 </small>
+
               </div>
 
             </div>
@@ -246,9 +319,10 @@ function App() {
             </div>
 
             <p className="section-intro">
-              Nuestros clásicos, preparados de forma casera
-              y con mucho cariño. Consultanos por WhatsApp
-              para conocer disponibilidad y opciones.
+              Nuestros clásicos, preparados de forma
+              casera y con mucho cariño. Consultanos
+              por WhatsApp para conocer disponibilidad
+              y opciones.
             </p>
 
           </div>
@@ -306,9 +380,10 @@ function App() {
 
           </div>
 
-          {/* PREVISUALIZACIÓN DE PRODUCTOS OCULTOS */}
+          {/* PRODUCTOS OCULTOS */}
 
           {!showAllProducts && (
+
             <div className="products-more">
 
               <div className="products-preview">
@@ -326,9 +401,11 @@ function App() {
                     />
 
                     <div className="preview-overlay">
+
                       <span>
                         {product.name}
                       </span>
+
                     </div>
 
                   </div>
@@ -357,11 +434,13 @@ function App() {
               </div>
 
             </div>
+
           )}
 
-          {/* BOTÓN VER MENOS */}
+          {/* VER MENOS */}
 
           {showAllProducts && (
+
             <div className="products-collapse">
 
               <button
@@ -371,6 +450,7 @@ function App() {
                   setShowAllProducts(false)
                 }
               >
+
                 <span>
                   Ver menos
                 </span>
@@ -380,6 +460,7 @@ function App() {
               </button>
 
             </div>
+
           )}
 
         </section>
@@ -413,11 +494,12 @@ function App() {
               </h2>
 
               <p>
-                SyG nace de las ganas de compartir cosas
-                ricas, caseras y hechas con dedicación.
-                Cada pedido se prepara con ese toque
-                especial que hace que algo sencillo se
-                convierta en un momento para recordar.
+                SyG nace de las ganas de compartir
+                cosas ricas, caseras y hechas con
+                dedicación. Cada pedido se prepara
+                con ese toque especial que hace que
+                algo sencillo se convierta en un
+                momento para recordar.
               </p>
 
               <p className="quote">
@@ -461,8 +543,8 @@ function App() {
 
           <p>
             Escribinos por WhatsApp y te contamos
-            disponibilidad, tamaños, sabores y opciones
-            personalizadas.
+            disponibilidad, tamaños, sabores y
+            opciones personalizadas.
           </p>
 
           <a
@@ -547,6 +629,121 @@ function App() {
         </p>
 
       </footer>
+
+      {/* ================================================== */}
+      {/* LOGIN MODAL */}
+      {/* ================================================== */}
+
+      {showLogin && (
+
+        <div
+          className="login-overlay"
+          onMouseDown={(event) => {
+
+            if (
+              event.target === event.currentTarget
+            ) {
+              closeLogin();
+            }
+
+          }}
+        >
+
+          <div className="login-modal">
+
+            <button
+              type="button"
+              className="login-close"
+              onClick={closeLogin}
+              aria-label="Cerrar"
+            >
+              <X size={20} />
+            </button>
+
+            <div className="login-logo">
+
+              <span className="brand-script">
+                SyG
+              </span>
+
+              <span className="brand-subtitle">
+                PASTELERÍA CASERA
+              </span>
+
+            </div>
+
+            <p className="login-eyebrow">
+              ÁREA PRIVADA
+            </p>
+
+            <h2>
+              Bienvenida
+            </h2>
+
+            <p className="login-description">
+              Accedé al creador de publicaciones
+              de SyG Pastelería.
+            </p>
+
+            <form
+              className="login-form"
+              onSubmit={handleLogin}
+            >
+
+              <label>
+                Usuario
+
+                <input
+                  type="text"
+                  value={username}
+                  onChange={(event) =>
+                    setUsername(event.target.value)
+                  }
+                  placeholder="Ingresá tu usuario"
+                  autoComplete="username"
+                  autoFocus
+                />
+
+              </label>
+
+              <label>
+                Contraseña
+
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(event) =>
+                    setPassword(event.target.value)
+                  }
+                  placeholder="Ingresá tu contraseña"
+                  autoComplete="current-password"
+                />
+
+              </label>
+
+              {loginError && (
+
+                <p className="login-error">
+                  {loginError}
+                </p>
+
+              )}
+
+              <button
+                type="submit"
+                className="login-submit"
+              >
+                Iniciar sesión
+                <ArrowRight size={18} />
+              </button>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      )}
 
     </div>
   );
