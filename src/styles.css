@@ -46,6 +46,10 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
+button {
+  font-family: inherit;
+}
+
 .site {
   min-height: 100vh;
   overflow: hidden;
@@ -71,8 +75,6 @@ a {
   z-index: 10;
 }
 
-/* LOGO */
-
 .brand {
   display: flex;
   flex-direction: column;
@@ -86,8 +88,11 @@ a {
 
 .brand-script {
   font-family: "Parisienne", cursive;
+
   font-size: 42px;
+
   color: var(--brown);
+
   line-height: 0.85;
 }
 
@@ -95,21 +100,23 @@ a {
   margin-top: 7px;
 
   font-family: "DM Sans", sans-serif;
+
   font-size: 8px;
 
   letter-spacing: 0.22em;
 
   color: var(--muted);
+
   font-weight: 600;
 }
 
-/* NAV */
-
 .desktop-nav {
   display: flex;
+
   gap: 32px;
 
   font-size: 13px;
+
   color: var(--muted);
 }
 
@@ -123,15 +130,15 @@ a {
   color: var(--brown-dark);
 }
 
-/* BOTÓN PEDIR */
-
 .header-order {
   display: inline-flex;
+
   align-items: center;
 
   gap: 8px;
 
   background: var(--brown);
+
   color: white;
 
   padding: 11px 17px;
@@ -139,6 +146,7 @@ a {
   border-radius: 999px;
 
   font-size: 13px;
+
   font-weight: 600;
 
   transition:
@@ -148,7 +156,9 @@ a {
 
 .header-order:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(90, 50, 31, 0.15);
+
+  box-shadow:
+    0 10px 25px rgba(90, 50, 31, 0.15);
 }
 
 /* =====================================================
@@ -194,8 +204,6 @@ a {
   box-shadow: var(--shadow);
 }
 
-/* DECORACIONES */
-
 .hero::before,
 .hero::after {
   content: "";
@@ -226,10 +234,9 @@ a {
   display: none;
 }
 
-/* TEXTO */
-
 .hero-copy {
   position: relative;
+
   z-index: 2;
 
   max-width: 580px;
@@ -289,8 +296,6 @@ a {
   margin: 28px 0;
 }
 
-/* BOTONES */
-
 .hero-actions {
   display: flex;
 
@@ -305,6 +310,7 @@ a {
   display: inline-flex;
 
   align-items: center;
+
   justify-content: center;
 
   gap: 9px;
@@ -345,8 +351,6 @@ a {
   background: rgba(90, 50, 31, 0.04);
 }
 
-/* FRASE */
-
 .hero-note {
   margin-top: 45px;
 
@@ -365,13 +369,14 @@ a {
 
 .line {
   width: 28px;
+
   height: 1px;
 
   background: var(--rose);
 }
 
 /* =====================================================
-   FOTO PRINCIPAL
+   FOTO HERO
 ===================================================== */
 
 .hero-visual {
@@ -394,10 +399,9 @@ a {
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 }
-
-/* FOTO */
 
 .hero-photo {
   width: 88%;
@@ -436,8 +440,6 @@ a {
   transform: scale(1.07);
 }
 
-/* BORDE DECORATIVO */
-
 .hero-photo-decoration {
   position: absolute;
 
@@ -471,13 +473,14 @@ a {
 }
 
 /* =====================================================
-   TARJETA FLOTANTE
+   TARJETA HERO
 ===================================================== */
 
 .floating-card {
   position: absolute;
 
   left: 0;
+
   bottom: 38px;
 
   background: rgba(255, 250, 247, 0.96);
@@ -509,6 +512,7 @@ a {
   flex-shrink: 0;
 
   display: grid;
+
   place-items: center;
 
   background: var(--rose-light);
@@ -536,7 +540,7 @@ a {
 }
 
 /* =====================================================
-   SECCIONES GENERALES
+   SECCIONES
 ===================================================== */
 
 .category-section,
@@ -624,6 +628,7 @@ a {
   height: 70px;
 
   display: grid;
+
   place-items: center;
 
   border-radius: 50%;
@@ -738,12 +743,6 @@ a {
 
   overflow: hidden;
 
-  color: rgba(90, 50, 31, 0.65);
-
-  font-family: "Cormorant Garamond", serif;
-
-  font-size: 20px;
-
   background: #e5d2c8;
 }
 
@@ -774,6 +773,18 @@ a {
 
 .product-image-4 {
   background: #dcc8bb;
+}
+
+.product-image-5 {
+  background: #ead8cf;
+}
+
+.product-image-6 {
+  background: #e3d4c7;
+}
+
+.product-image-7 {
+  background: #dfe6dc;
 }
 
 .product-info {
@@ -838,6 +849,166 @@ a {
 }
 
 /* =====================================================
+   PREVIEW PRODUCTOS OCULTOS
+===================================================== */
+
+.products-more {
+  margin-top: 28px;
+
+  position: relative;
+
+  min-height: 250px;
+
+  overflow: hidden;
+
+  border-radius: var(--radius);
+}
+
+.products-preview {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 18px;
+
+  filter: blur(4px);
+
+  transform: scale(1.015);
+
+  opacity: 0.62;
+
+  pointer-events: none;
+}
+
+.preview-card {
+  height: 250px;
+
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  background: var(--rose-light);
+}
+
+.preview-card img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+}
+
+.preview-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: rgba(255, 250, 247, 0.35);
+
+  color: var(--brown);
+
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: 26px;
+
+  font-weight: 600;
+}
+
+.products-more-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(245, 238, 234, 0.05),
+      rgba(245, 238, 234, 0.8)
+    );
+}
+
+.products-toggle {
+  border: 0;
+
+  cursor: pointer;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  min-height: 52px;
+
+  padding: 0 25px;
+
+  border-radius: 999px;
+
+  background: var(--brown);
+
+  color: white;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  box-shadow:
+    0 15px 30px rgba(90, 50, 31, 0.2);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.products-toggle:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 18px 35px rgba(90, 50, 31, 0.25);
+}
+
+.products-collapse {
+  display: flex;
+
+  justify-content: center;
+
+  margin-top: 35px;
+}
+
+.products-collapse .products-toggle {
+  background: transparent;
+
+  color: var(--brown);
+
+  border: 1px solid rgba(90, 50, 31, 0.25);
+
+  box-shadow: none;
+}
+
+.products-collapse .products-toggle:hover {
+  background: rgba(90, 50, 31, 0.04);
+
+  box-shadow: none;
+}
+
+/* =====================================================
    NOSOTROS
 ===================================================== */
 
@@ -896,54 +1067,35 @@ a {
 
   border-radius: 48% 48% 45% 45%;
 
-  display: grid;
+  overflow: hidden;
 
-  place-content: center;
-
-  text-align: center;
-
-  padding: 30px;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.65),
-      rgba(217, 184, 168, 0.45)
-    ),
-    repeating-linear-gradient(
-      45deg,
-      transparent 0 18px,
-      rgba(90, 50, 31, 0.035) 18px 19px
-    );
-
-  border: 1px dashed rgba(90, 50, 31, 0.22);
+  background: var(--rose-light);
 
   position: relative;
+
   z-index: 2;
+
+  box-shadow:
+    0 20px 45px rgba(72, 42, 28, 0.12);
+
+  border: 6px solid var(--paper);
 }
 
-.story-placeholder-content span {
+.story-image img {
+  width: 100%;
+  height: 100%;
+
   display: block;
 
-  font-family: "Parisienne", cursive;
+  object-fit: cover;
 
-  font-size: 55px;
+  object-position: center;
 
-  color: var(--brown);
+  transition: transform 0.5s ease;
 }
 
-.story-placeholder-content small {
-  display: block;
-
-  max-width: 180px;
-
-  margin-top: 8px;
-
-  color: var(--muted);
-
-  font-size: 11px;
-
-  line-height: 1.5;
+.story-image:hover img {
+  transform: scale(1.03);
 }
 
 .story-copy {
@@ -1085,6 +1237,7 @@ a {
   border-radius: 50%;
 
   display: grid;
+
   place-items: center;
 
   background: var(--paper);
@@ -1117,6 +1270,7 @@ a {
 ===================================================== */
 
 @media (max-width: 900px) {
+
   .desktop-nav {
     display: none;
   }
@@ -1173,6 +1327,7 @@ a {
 ===================================================== */
 
 @media (max-width: 600px) {
+
   .header {
     width: calc(100% - 30px);
 
@@ -1318,6 +1473,42 @@ a {
 
   .product-info {
     padding: 25px;
+  }
+
+  /* Preview de productos en móvil */
+
+  .products-more {
+    min-height: 190px;
+  }
+
+  .products-preview {
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 8px;
+
+    filter: blur(3px);
+  }
+
+  .preview-card {
+    height: 190px;
+
+    border-radius: 14px;
+  }
+
+  .preview-overlay {
+    font-size: 16px;
+
+    text-align: center;
+
+    padding: 10px;
+  }
+
+  .products-toggle {
+    min-height: 48px;
+
+    padding: 0 18px;
+
+    font-size: 12px;
   }
 
   .story-frame {
