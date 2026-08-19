@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { ArrowRight, Sparkles, Upload, Shuffle } from "lucide-react";
 import html2canvas from "html2canvas";
-import "./creator.css";
+import "./Creator.css";
 
 const DEFAULT_PHRASE =
   "Todo rico, caserito y hecho con el corazón.";
